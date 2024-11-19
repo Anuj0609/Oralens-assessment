@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Home() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
-  const [file, setFile] = useState(null);
+const [file, setFile] = useState<File | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = () => {
@@ -53,7 +53,11 @@ export default function Home() {
               <input
                 type="file"
                 className="w-full border px-2 py-1"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={(e) => {
+                  if (e.target.files) {
+                    setFile(e.target.files[0]);
+                  }
+                }}
               />
             </div>
           </div>
